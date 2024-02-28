@@ -1,43 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import FormInput from './FormInput';
-import SheetButton from './SheetButton';
+import React, { useState, useEffect } from 'react'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import FormInput from './FormInput'
+import SheetButton from './SheetButton'
 
 // This is a wrapper for google.script.run that lets us use promises.
-import { serverFunctions } from '../../utils/serverFunctions';
+import { serverFunctions } from '../../utils/serverFunctions'
 
 const SheetEditor = () => {
-  const [names, setNames] = useState([]);
+  const [names, setNames] = useState([])
 
   useEffect(() => {
     // Call a server global function here and handle the response with .then() and .catch()
-    serverFunctions.getSheetsData().then(setNames).catch(alert);
-  }, []);
+    serverFunctions.getSheetsData().then(setNames).catch(alert)
+  }, [])
 
   const deleteSheet = (sheetIndex) => {
-    serverFunctions.deleteSheet(sheetIndex).then(setNames).catch(alert);
-  };
+    serverFunctions.deleteSheet(sheetIndex).then(setNames).catch(alert)
+  }
 
   const setActiveSheet = (sheetName) => {
-    serverFunctions.setActiveSheet(sheetName).then(setNames).catch(alert);
-  };
+    serverFunctions.setActiveSheet(sheetName).then(setNames).catch(alert)
+  }
 
   // You can also use async/await notation for server calls with our server wrapper.
   // (This does the same thing as .then().catch() in the above handlers.)
   const submitNewSheet = async (newSheetName) => {
     try {
-      const response = await serverFunctions.addSheet(newSheetName);
-      setNames(response);
+      const response = await serverFunctions.addSheet(newSheetName)
+      setNames(response)
     } catch (error) {
       // eslint-disable-next-line no-alert
-      alert(error);
+      alert(error)
     }
-  };
+  }
 
   return (
     <div>
       <p>
-        <b>☀️ React demo! ☀️</b>
+        <b>☀️ React do! ☀️</b>
       </p>
       <p>
         This is a sample page that demonstrates a simple React app. Enter a name
@@ -62,7 +62,7 @@ const SheetEditor = () => {
           ))}
       </TransitionGroup>
     </div>
-  );
-};
+  )
+}
 
-export default SheetEditor;
+export default SheetEditor
